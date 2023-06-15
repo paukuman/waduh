@@ -9,16 +9,20 @@
         <div class="header"></div>
         <div class="main">
             <div class="home">
+                
                 <div
                 x-data="{ posts: [] }"
                 x-init="posts = await fetchJson('https://api.modules.my.id/v2/models');">
-                    <template x-if="posts.blocks.sortBy === 'STRIP_RANKING' && posts.blocks.models.length">
-                        <div class="popular" x-data="{popular = posts.blocks.models}">
+                <template x-for="post in posts.blocks && posts.blocks.length">
+                    <!-- [ Popular ] -->
+                    <template x-if="post.blocks.sortBy === 'STRIP_RANKING' && post.blocks.models.length">
+                        <div class="popular" x-data="{popular = post.blocks.models}">
                             <template x-for="pop in popular">
                                 <span x-text="pop.username"></span>
                             </template>
                         </div>
                     </template>
+                </template>
                 </div>
             </div>
         </div>
