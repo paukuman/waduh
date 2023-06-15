@@ -15,13 +15,15 @@
                 x-init="posts = await fetchJson('https://api.modules.my.id/v2/models');">
                 <template x-for="post in posts.blocks && posts.blocks.length">
                     <!-- [ Popular ] -->
-                    <template x-if="post.sortBy === 'STRIP_RANKING' && post.models.length">
-                        <div class="popular" x-data="{popular = post.models}">
-                            <template x-for="pop in popular">
-                                <span x-text="pop.username"></span>
-                            </template>
-                        </div>
-                    </template>
+                    <div class="wrap">
+                        <template x-if="post.sortBy === 'STRIP_RANKING' && post.models.length">
+                            <div class="popular" x-data="{popular = post.models}">
+                                <template x-for="pop in popular">
+                                    <span x-text="pop.username"></span>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
                 </template>
                 </div>
             </div>
