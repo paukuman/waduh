@@ -13,7 +13,7 @@
                 <div
                 x-data="{ posts: [] }"
                 x-init="posts = await fetchJson('https://api.modules.my.id/v2/models');">
-                <template x-for="post in posts.blocks && posts.blocks.length">
+                <template x-for="post in posts.blocks">
                     <!-- [ Popular ] -->
                     <div class="wrap" x-init="console.log(post)">
                         <template x-if="post.sortBy === 'countryGenderModels' && post.models.length">
