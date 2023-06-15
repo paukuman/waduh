@@ -17,6 +17,7 @@
                     <!-- [ Popular ] -->
                     <div class="wrap">
                         <template x-if="post.sortBy === 'countryGenderModels' && post.models.length">
+                            <span x-text="post.sortBy"></span>
                             <div class="popular" x-data="{popular = post.models}">
                                 <template x-for="pop in popular">
                                     <span x-text="pop.username"></span>
