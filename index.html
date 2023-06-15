@@ -16,14 +16,12 @@
                 <template x-for="post in posts.blocks">
                     <!-- [ Popular ] -->
                     <div class="wrap">
-                        <template x-if="post.sortBy == 'countryGenderModels'">
-                            <span x-text="post.sortBy" x-init="console.log(post.sortBy)"></span>
-                            <div class="popular" x-data="{popular = post.models}">
-                                <template x-for="pop in popular">
-                                    <span x-text="pop.username"></span>
-                                </template>
-                            </div>
-                        </template>
+                        <span x-text="post.sortBy" x-init="console.log(post.sortBy)"></span>
+                        <div class="popular" x-data="{popular = post.models}">
+                            <template x-for="pop in popular">
+                                <span x-text="pop.username"></span>
+                            </template>
+                        </div>
                     </div>
                 </template>
                 </div>
