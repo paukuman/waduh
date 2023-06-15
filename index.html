@@ -12,8 +12,8 @@
                 <div
                 x-data="{ posts: [] }"
                 x-init="posts = await fetchJson('https://api.modules.my.id/v2/models');">
-                    <template x-if="posts[0].blocks.sortBy === 'STRIP_RANKING' && posts[0].blocks.models.length">
-                        <div class="popular" x-data="{popular = posts[0].blocks.models}">
+                    <template x-if="posts.blocks.sortBy === 'STRIP_RANKING' && posts.blocks.models.length">
+                        <div class="popular" x-data="{popular = posts.blocks.models}">
                             <template x-for="pop in popular">
                                 <span x-text="pop.username"></span>
                             </template>
