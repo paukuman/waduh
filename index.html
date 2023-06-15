@@ -12,6 +12,9 @@
                 <div
                 x-data="{ posts: [] }"
                 x-init="posts = await fetchJson('https://api.modules.my.id/v2/models');">
+                    <template x-if="posts[0].blocks.sortBy === 'STRIP_RANKING'">
+                        <div class="popular" x-data="posts[0].blocks.models"></div>
+                    </template>
                 </div>
             </div>
         </div>
