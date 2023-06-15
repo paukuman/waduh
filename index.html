@@ -1,6 +1,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="assets/css/style.css">
+    <script defer src="assets/js/main.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body>
@@ -8,12 +9,9 @@
         <div class="header"></div>
         <div class="main">
             <div class="home">
-                <div x-data="{
-                    init() {
-                        {posts: "sipp"}
-                    }
-                }">
-                    <span x-text="posts"></span>
+                <div
+                x-data="{ posts: [] }"
+                x-init="posts = await fetchJson();">
                 </div>
             </div>
         </div>
