@@ -16,10 +16,9 @@
                 <template x-for="post in posts.blocks">
                     <!-- [ Popular ] -->
                     <div class="wrap">
-                        <span x-text="post.sortBy" x-init="console.log(post.sortBy)"></span>
-                        <div class="popular" x-data="{popular = post.models}">
-                            <template x-for="pop in popular">
-                                <span x-text="pop.username"></span>
+                        <div class="popular" x-data="{models = post.models}">
+                            <template x-for="model in models">
+                                <span x-text="model.username"></span>
                             </template>
                         </div>
                     </div>
