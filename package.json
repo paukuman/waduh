@@ -1,0 +1,23 @@
+{
+  "name": "waduh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paukuman/waduh.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paukuman/waduh/issues"
+  },
+  "homepage": "https://github.com/paukuman/waduh#readme",
+  "dependencies": {
+    "materialize-css": "^1.0.0",
+    "vue": "^3.3.4"
+  }
+}

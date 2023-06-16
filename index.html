@@ -1,29 +1,29 @@
 <html>
+
 <head>
+
+    <!-- [ Framework CSS ] -->
+    <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
+    <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+
+    <!-- [ Framework JS ] -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- [ Local ] -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <script defer src="assets/js/main.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
 </head>
+
 <body>
     <div class="container">
         <div class="header"></div>
         <div class="main">
-            <div class="home">
-                
-                <div
-                x-data="{ posts: [] }"
-                x-init="posts = await fetchJson('https://api.modules.my.id/v2/models');">
-                <template x-for="post in posts.blocks">
-                    <!-- [ Popular ] -->
-                    <div class="wrap">
-                        <template x-for="model in post.models">
-                            <span x-text="model.username"></span>
-                        </template>
-                    </div>
-                </template>
-                </div>
-            </div>
+            <div id="app">{{ message }}</div>
         </div>
     </div>
+    <footer>
+        <script defer type="application/javascript" src="assets/vue/main.vue"></script>
+    </footer>
 </body>
+
 </html>
