@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/paukuman/waduh#readme",
   "dependencies": {
-    "materialize-css": "^1.0.0",
-    "vue": "^3.3.4"
+    "alpinejs": "^3.12.2",
+    "materialize-css": "^1.0.0"
   }
 }

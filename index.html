@@ -6,11 +6,12 @@
     <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
     <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
 
-    <!-- [ Framework JS ] -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
     <!-- [ Local ] -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=213">
+    <script defer type="application/javascript" src="assets/js/main.js"></script>
+
+    <!-- [ Framework JS ] -->
+    <script defer src="node_modules/alpinejs/dist/cdn.min.js"></script>
 
 </head>
 
@@ -18,11 +19,40 @@
     <div class="container">
         <div class="header"></div>
         <div class="main">
-            <div id="app">{{ message }}</div>
+            <div x-data="{ modules: false, hasModules: false }" x-init="async () => {
+                    let { blocks } = await fetchJson('https://api.modules.my.id/v2/models');
+                    modules = blocks;
+                    hasModules = blocks.length
+                }">
+                <template x-if="hasModules">
+                    <div class="wrap">
+                        <template x-for="{url, models} in modules">
+                            <div class="lists" x-data="{ models, url }">
+                                <h2 x-text="url"></h2>
+                                <div class="row">
+                                    <template x-for="model in models">
+                                        <div class="col s3" x-data="model" x-init="() => {
+                                            const get_id = model.hlsPlaylist.split('/').pop().split('_').shift();
+                                            model.snapshot = `https://img.strpst.com/thumbs/${model.snapshotTimestamp}/${get_id}_webp`;
+                                        }">
+                                            <div class="card">
+                                                <div class="card-image">
+                                                    <img class="bg_img" x-init="$el.style.backgroundImage = `url(${ model.snapshot })`" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+                                                    <span x-text="model.username" class="card-title"></span>
+                                                    <span class="online" x-text="model.isOnline?'Online':'Offline'"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </div>
         </div>
     </div>
     <footer>
-        <script defer type="application/javascript" src="assets/vue/main.vue"></script>
     </footer>
 </body>
 
