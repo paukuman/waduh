@@ -1,0 +1,26 @@
+<template x-for="{url, id, models} in modules">
+    <div class="homelist my-5" x-data="{ models, url, id }" x-init="$el.setAttribute('id', id);">
+        <h2 x-text="id"></h2>
+        <div class="row">
+            <template x-for="model in models">
+                <div class="col col-4 col-md-3 g-2" x-data="model" x-init="() => {
+                            const get_id = model.hlsPlaylist.split('/').pop().split('_').shift();
+                            model.snapshot = `https://img.strpst.com/thumbs/${model.popularSnapshotTimestamp}/${get_id}_webp`;
+                        }">
+                    <div class="card" x-init="() => {
+                        $el.onclick = () => {
+                            window.location.hash = `#${model.username}`;
+                        }
+                    }">
+                        <div class="card-image">
+                            <img class="bg_img card-img-top"
+                                x-init="$el.style.backgroundImage = `url(${ model.snapshot })`"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=">
+                            <span class="online" x-text="model.isOnline?'Online':'Offline'"></span>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>
