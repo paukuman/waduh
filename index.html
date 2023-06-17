@@ -5,8 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- [ Framework CSS ] -->
-    <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
-    <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous">
+    </script>
+
+    <!-- [ Video JS ] -->
+    <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
+    <script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
+
 
     <!-- [ Local ] -->
     <link rel="stylesheet" href="assets/css/style.css?v=213">
@@ -18,40 +29,81 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="header"></div>
-        <div class="main">
-            <div x-data="{ modules: false, hasModules: false }" x-init="async () => {
-                    let { blocks } = await fetchJson('https://api.modules.my.id/v2/models');
-                    modules = blocks;
-                    hasModules = blocks.length
-                }">
-                <template x-if="hasModules">
-                    <div class="wrap">
-                        <template x-for="{url, models} in modules">
-                            <div class="lists" x-data="{ models, url }">
-                                <h2 x-text="url"></h2>
-                                <div class="row">
-                                    <template x-for="model in models">
-                                        <div class="col s3" x-data="model" x-init="() => {
+    <div class="jonaa">
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Waduh</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"
+                        width="24px" height="24px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" id="Glyph"
+                        version="1.1" xml:space="preserve">
+                        <path d="M16,13c-1.654,0-3,1.346-3,3s1.346,3,3,3s3-1.346,3-3S17.654,13,16,13z"
+                            id="XMLID_287_" />
+                        <path d="M6,13c-1.654,0-3,1.346-3,3s1.346,3,3,3s3-1.346,3-3S7.654,13,6,13z" id="XMLID_289_" />
+                        <path d="M26,13c-1.654,0-3,1.346-3,3s1.346,3,3,3s3-1.346,3-3S27.654,13,26,13z"
+                            id="XMLID_291_" /></svg>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    </ul>
+                    <form class="d-flex m-0" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <div class="main container" x-data="{ modules: false, hasModules: false }" x-init="async () => {
+                let { blocks } = await fetchJson('https://api.modules.my.id/v2/models');
+                modules = blocks;
+                hasModules = blocks.length
+            }">
+            <template x-if="hasModules">
+                <template x-for="{url, id, models} in modules">
+                    <div class="homelist my-5" x-data="{ models, url, id }" x-init="$el.setAttribute('id', id);">
+                        <h2 x-text="id"></h2>
+                        <div class="row">
+                            <template x-for="model in models">
+                                <div class="col col-4 col-md-3 g-2" x-data="model" x-init="() => {
                                             const get_id = model.hlsPlaylist.split('/').pop().split('_').shift();
-                                            model.snapshot = `https://img.strpst.com/thumbs/${model.snapshotTimestamp}/${get_id}_webp`;
+                                            model.snapshot = `https://img.strpst.com/thumbs/${model.popularSnapshotTimestamp}/${get_id}_webp`;
                                         }">
-                                            <div class="card">
-                                                <div class="card-image">
-                                                    <img class="bg_img" x-init="$el.style.backgroundImage = `url(${ model.snapshot })`" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
-                                                    <span x-text="model.username" class="card-title"></span>
-                                                    <span class="online" x-text="model.isOnline?'Online':'Offline'"></span>
+                                    <div class="card" data-bs-toggle="modal"
+                                        x-init="$el.setAttribute('data-bs-target',`#${model.username}`)">
+                                        <div class="card-image">
+                                            <img class="bg_img card-img-top"
+                                                x-init="$el.style.backgroundImage = `url(${ model.snapshot })`"
+                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=">
+                                            <span class="online" x-text="model.isOnline?'Online':'Offline'"></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal -->
+                                    <div x-init="$el.setAttribute('id',`${model.username}`)" class="modal fade"
+                                        tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <video id="my-video" class="video-js" controls preload="auto"
+                                                        width="640" height="264" poster="MY_VIDEO_POSTER.jpg"
+                                                        data-setup="{liveui: true}" x-init="$el.setAttribute('poster', model.snapshot)">
+                                                        <source x-init="$el.src = model.hlsPlaylist" type="video/mp4" />
+                                                    </video>
                                                 </div>
                                             </div>
                                         </div>
-                                    </template>
+                                    </div>
                                 </div>
-                            </div>
-                        </template>
+                            </template>
+                        </div>
                     </div>
                 </template>
-            </div>
+            </template>
         </div>
     </div>
     <footer>
