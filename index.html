@@ -13,8 +13,8 @@
 
 
     <!-- [ Local ] -->
-    <link rel="stylesheet" href="assets/css/style.css?v=213">
-    <script defer type="application/javascript" src="assets/js/main.js?=asdsad"></script>
+    <link rel="stylesheet" href="assets/css/style.css?v=4">
+    <script defer type="application/javascript" src="assets/js/main.js?=4"></script>
 
     <!-- [ Framework JS ] -->
     <script defer src="node_modules/alpinejs/dist/cdn.min.js"></script>
@@ -24,50 +24,26 @@
 <body>
     <div class="jonaa">
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Waduh</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"
-                        width="24px" height="24px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" id="Glyph"
-                        version="1.1" xml:space="preserve">
-                        <path d="M16,13c-1.654,0-3,1.346-3,3s1.346,3,3,3s3-1.346,3-3S17.654,13,16,13z"
-                            id="XMLID_287_" />
-                        <path d="M6,13c-1.654,0-3,1.346-3,3s1.346,3,3,3s3-1.346,3-3S7.654,13,6,13z" id="XMLID_289_" />
-                        <path d="M26,13c-1.654,0-3,1.346-3,3s1.346,3,3,3s3-1.346,3-3S27.654,13,26,13z"
-                            id="XMLID_291_" /></svg>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" x-data = "{html : false}" x-init="html = await ( await fetch('assets/part/navbar.html') ).text()" x-html="html"></nav>
 
-                    </ul>
-                    <form class="d-flex m-0" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
-
-        <div class="main container" x-data="{ modules: false, hasModules: false, hasHash: false, user: false }" x-init="async () => {
+        <div class="main container" x-data="{ modules: 'https://api.modules.my.id', json: false, open: false, part: false }" x-init="async () => {
                 if(!window.location.hash) {
-                    let { blocks } = await fetchJson('https://api.modules.my.id/v2/models');
-                    modules = blocks;
-                    hasModules = blocks.length
+                    part = 'assets/part/home.html';
+                    let { blocks } = await fetchJson(`${modules}/v2/models`);
+                    json = blocks;
+                    open = blocks.length;
                 } else {
                     const username = window.location.hash.substring(1);
-                    let cam = await fetchJson(`https://api.modules.my.id/v2/models/username/${username}/cam`);
-                    user = cam.user;
-                    hasHash = true;
+                    part = 'assets/part/stream.html';
+                    let { user } = await fetchJson(`${modules}/v2/models/username/${username}/cam`);
+                    json = user;
+                    open = true;
+
+                    const rel = await fetchJson(`${modules}/models/username/${username}/related`);
+                    related = rel.models;
                 }
             }">
-
-            <template x-if="hasHash" x-data="{html : false}" x-init="html = await (await fetch('assets/part/stream.html')).text()" x-html="html"></template>
-
-            <template x-if="hasModules && !hasHash" x-data = "{html : false}" x-init="html = await (await fetch('assets/part/home.html')).text()" x-html="html">
-            </template>
+            <template x-if="open" x-data = "{html : false}" x-init="html = await ( await fetch(part) ).text()" x-html="html"></template>
         </div>
     </div>
     <footer>
