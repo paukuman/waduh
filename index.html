@@ -24,17 +24,17 @@
 <body>
     <div class="jonaa">
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" x-data = "{html : false}" x-init="html = await ( await fetch('assets/part/navbar.html') ).text()" x-html="html"></nav>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" x-data = "{html : false}" x-init="html = await ( await fetch('assets/part/navbar.html?v=4') ).text()" x-html="html"></nav>
 
         <div class="main container" x-data="{ modules: 'https://api.modules.my.id', json: false, open: false, part: false }" x-init="async () => {
                 if(!window.location.hash) {
-                    part = 'assets/part/home.html';
+                    part = 'assets/part/home.html?v=4';
                     let { blocks } = await fetchJson(`${modules}/v2/models`);
                     json = blocks;
                     open = blocks.length;
                 } else {
                     const username = window.location.hash.substring(1);
-                    part = 'assets/part/stream.html';
+                    part = 'assets/part/stream.html?v=4';
                     let { user } = await fetchJson(`${modules}/v2/models/username/${username}/cam`);
                     json = user;
                     open = true;
