@@ -1,6 +1,12 @@
 <html>
 
 <head>
+    <title>Waduh - Unofficial Live Sex Cams</title>
+
+    <meta property="og:image" content="https://iili.io/H6yvb7p.th.jpg">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="436">
+    <meta property="og:image:height" content="228">
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -24,9 +30,11 @@
 <body>
     <div class="jonaa">
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" x-data = "{html : ''}" x-init="html = await ( await fetch('assets/part/navbar.html?v=4') ).text()" x-html="html"></nav>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" x-data="{html : ''}"
+            x-init="html = await ( await fetch('assets/part/navbar.html') ).text()" x-html="html"></nav>
 
-        <div class="main container" x-data="{ modules: 'https://api.modules.my.id', json: false, open: false, part: false }" x-init="async () => {
+        <div class="main container"
+            x-data="{ modules: 'https://api.modules.my.id', json: false, open: false, part: false }" x-init="async () => {
                 if(!window.location.hash) {
                     part = 'assets/part/home.html';
                     let { blocks } = await fetchJson(`${modules}/v2/models?limit=50&topLimit=50&favoritesLimit=50&primaryTag=girls`);
@@ -40,7 +48,8 @@
                     open = true;
                 }
             }">
-            <template x-if="open" x-data = "{html : ''}" x-init="html = await ( await fetch(part) ).text()" x-html="html"></template>
+            <template x-if="open" x-data="{html : ''}" x-init="html = await ( await fetch(part) ).text()"
+                x-html="html"></template>
         </div>
     </div>
     <footer>
