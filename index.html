@@ -30,10 +30,10 @@
 <body>
     <div class="jonaa">
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" x-data="{html : ''}"
+        <nav class="navbar navbar-expand-lg" x-data="{html : ''}"
             x-init="html = await ( await fetch('assets/part/navbar.html') ).text()" x-html="html"></nav>
 
-            <div class="preload">---- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ------</div>
+            <div class="container preload">---- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ------</div>
         <div class="main container"
             x-data="{ modules: 'https://api.modules.my.id', json: false, open: false, part: false }" x-init="async () => {
                 if(!window.location.hash) {
