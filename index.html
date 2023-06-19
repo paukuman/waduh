@@ -33,10 +33,11 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary" x-data="{html : ''}"
             x-init="html = await ( await fetch('assets/part/navbar.html') ).text()" x-html="html"></nav>
 
+            <div class="preload">---- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ------</div>
         <div class="main container"
             x-data="{ modules: 'https://api.modules.my.id', json: false, open: false, part: false }" x-init="async () => {
                 if(!window.location.hash) {
-                    part = 'assets/part/home.html';
+                    part = 'assets/part/home.html?v=asdas';
                     let { blocks } = await fetchJson(`${modules}/v2/models?limit=50&topLimit=50&favoritesLimit=50&primaryTag=girls`);
                     json = blocks;
                     open = blocks.length;
@@ -47,9 +48,10 @@
                     json = user;
                     open = true;
                 }
+                document.querySelector('.preload').remove();
             }">
-            <template x-if="open" x-data="{html : ''}" x-init="html = await ( await fetch(part) ).text()"
-                x-html="html"></template>
+            <template x-if="open" x-data="{html : ''}" x-init="html = await ( await fetch(part) ).text()" x-html="html">
+            </template>
         </div>
     </div>
     <footer>
