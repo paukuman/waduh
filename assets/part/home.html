@@ -1,7 +1,7 @@
 <template x-for="{url, id, models} in json">
     <div class="homelist my-5" x-data="{ models, url, id }" x-init="$el.setAttribute('id', id);">
         <h2 x-data x-text="showTitle(id)"></h2>
-        <div class="row" x-init="console.log(models)">
+        <div class="row">
             <template x-for="model in models">
                 <div class="col col-4 col-md-3 g-2" x-data="model" x-init="() => {
                             const get_id = model.hlsPlaylist.split('/').pop().split('_').shift().split('.').shift();
