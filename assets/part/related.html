@@ -4,7 +4,7 @@
         <template x-for="model in related">
             <div class="col col-4 col-md-3 g-2" x-data="model" x-init="() => {
                         const get_id = model.hlsPlaylist.split('/').pop().split('_').shift().split('.').shift();
-                        model.snapshot = `https://img.strpst.com/thumbs/${model.popularSnapshotTimestamp}/${get_id}_webp`;
+                        //model.snapshot = `https://img.strpst.com/thumbs/${model.popularSnapshotTimestamp}/${get_id}_webp`;
                     }">
                 <div class="card" x-init="() => {
                     $el.onclick = () => {

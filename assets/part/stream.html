@@ -12,11 +12,12 @@
             </p>
         </video>
     </div>
+    <div class="chat"></div>
     <div class="related" x-data="{ related: '', has: false }" x-init="async () => {
         const rel = await fetchJson(`${modules}/models/username/${window.location.hash.substring(1)}/related`);
         related = rel.models;
         has = related.length;
     }">
-        <template x-if="has" x-data = "{html : ''}" x-init="html = await ( await fetch('assets/part/related.html') ).text()" x-html="html"></template>
+        <template x-if="has" x-data = "{html : ''}" x-init="html = await ( await fetch('assets/part/related.html?v=4') ).text()" x-html="html"></template>
     </div>
 </div>

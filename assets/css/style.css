@@ -13,6 +13,21 @@ body {
     background-color: #0e1212;
 }
 
+.jonaa .nav {
+    padding: 1rem 0.5rem;
+}
+
+.jonaa .nav a {
+    padding: .25rem 1rem;
+    font-size: 12px;
+    color: cyan;
+}
+
+.jonaa .nav a.active {
+    background-color: cyan;
+    color: var(--bg-dark);
+}
+
 .jonaa nav.navbar {
     background-color: var(--bg-dark);
     color: #fff;
@@ -85,4 +100,45 @@ body {
 #videoku {
     width: 100%;
     height: 100%;
+}
+
+.navbar-brand .count {
+    font-size: 12px;
+    margin: 0.5rem;
+    font-weight: bold;
+    text-shadow: 1px 2px 6px lightgreen;
+}
+
+.chat {
+    height: 300px;
+    overflow-y: scroll;
+    margin: 0.75rem 0;
+    border-radius: 0.25rem;
+    background-color: #000;
+}
+
+.chat .message {
+    font-size: 12px;
+    margin: 1rem;
+    padding: .5rem .7rem;
+    background-color: #607D8B;
+    color: #fff;
+    font-weight: bold;
+    border-radius: .5rem;
+}
+
+.chat .message .level {
+    display: block;
+}
+
+.chat .message .username {
+    color: yellow;
+    margin-right: .5rem;
+}
+
+.chat .message .level {
+    font-size: 10px;
+    font-family: monospace;
+    margin: .5rem 0 0;
+    color: gold;
 }

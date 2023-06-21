@@ -20,7 +20,7 @@
 
     <!-- [ Local ] -->
     <link rel="stylesheet" href="assets/css/style.css?v=5">
-    <script defer type="application/javascript" src="assets/js/main.js?=5"></script>
+    <script defer type="application/javascript" src="assets/js/main.js?=6"></script>
 
     <!-- [ Framework JS ] -->
     <script defer src="node_modules/alpinejs/dist/cdn.min.js"></script>
@@ -31,14 +31,33 @@
     <div class="jonaa">
 
         <nav class="navbar navbar-expand-lg" x-data="{html : ''}"
-            x-init="html = await ( await fetch('assets/part/navbar.html') ).text()" x-html="html"></nav>
+            x-init="html = await ( await fetch('assets/part/navbar.html?c=4') ).text()" x-html="html"></nav>
 
-            <div class="container preload">---- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ------</div>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="?tab=girls">Girls</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?tab=couples">Couples</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?tab=guys">Guys</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?tab=trans">Trans</a>
+            </li>
+        </ul>
+
+        <div class="container preload">---- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- ----- ---
+            ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- -- -----
+            --- ---- ------- --- - -- ---------- -------- -- ----- --- ---- ------- --- - -- ---------- -------- --
+            ----- --- ---- ------- --- - -- ------</div>
         <div class="main container"
             x-data="{ modules: 'https://api.modules.my.id', json: false, open: false, part: false }" x-init="async () => {
                 if(!window.location.hash) {
                     part = 'assets/part/home.html?v=asdas';
-                    let { blocks } = await fetchJson(`${modules}/v2/models?limit=50&topLimit=50&favoritesLimit=50&primaryTag=girls`);
+                    let tab = getParams()['tab'] ? getParams()['tab'] : 'girls';
+                    let { blocks } = await fetchJson(`${modules}/v2/models?limit=50&topLimit=50&favoritesLimit=50&primaryTag=${tab}`);
                     json = blocks;
                     open = blocks.length;
                 } else {
@@ -47,6 +66,7 @@
                     let { user } = await fetchJson(`${modules}/v2/models/username/${username}/cam`);
                     json = user;
                     open = true;
+                    liveChat(username);
                 }
                 document.querySelector('.preload').remove();
             }">
