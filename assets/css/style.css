@@ -142,3 +142,15 @@ body {
     margin: .5rem 0 0;
     color: gold;
 }
+
+span.tipped b {
+    color: cyan;
+}
+
+span.lovense b {
+    color: lightcoral;
+}
+
+span.lovense i {
+    color: yellow;
+}

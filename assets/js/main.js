@@ -63,11 +63,28 @@ async function liveChat(username) {
     const { messages } = await fetchJson(`https://api.modules.my.id/v2/models/username/${username}/chat?source=regular`);
     let chat = document.querySelector('.chat');
     if(chat) {
-        for({details, userData} of messages) {
+        for(let message of messages.reverse()) {
+            let body = '';
+            let {details, userData} = message;
             let child = document.createElement('div');
+            let ranking = userData.userRanking;
+            let lovenseDetails = details.lovenseDetails;
+            if(lovenseDetails) {
+                let {detail} = lovenseDetails;
+                let {name, amount, power, time, specialActualValue} = detail
+                console.log(lovenseDetails);
+                if(power) {
+                    body = `<span class="lovense"><b>${power?power:specialActualValue}</b> <i>${time} sec</i> by ${name}</span>`;
+                } else {
+                    body = `<span class="tipped"><b>${name}</b> tipped ${amount}tk</span>`;
+                }
+            } else {
+                body = `<span class="username">${userData.username}</span><span>${details.body}</span><span class="level">Level ${ranking?ranking.level:''}[${ranking?ranking.league:''}]</span>`;
+            }
+
             child.classList.add('message');
             chat.appendChild(child);
-            child.innerHTML = `<span class="username">${userData.username}</span><span>${details.body}</span><span class="level">Level ${userData.userRanking.level}[${userData.userRanking.league}]</span>`;
+            child.innerHTML = body;
         }
     }
 
