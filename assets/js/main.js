@@ -62,6 +62,7 @@ async function countModel() {
 async function liveChat(username) {
     const { messages } = await fetchJson(`https://api.modules.my.id/v2/models/username/${username}/chat?source=regular`);
     let chat = document.querySelector('.chat');
+    chat.innerHTML = '';
     if(chat) {
         for(let message of messages.reverse()) {
             let body = '';
@@ -72,7 +73,6 @@ async function liveChat(username) {
             if(lovenseDetails) {
                 let {detail} = lovenseDetails;
                 let {name, amount, power, time, specialActualValue} = detail
-                console.log(lovenseDetails);
                 if(power) {
                     body = `<span class="lovense"><b>${power?power:specialActualValue}</b> <i>${time} sec</i> by ${name}</span>`;
                 } else {
