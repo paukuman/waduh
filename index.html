@@ -55,14 +55,14 @@
         <div class="main container"
             x-data="{ modules: 'https://api.modules.my.id', json: false, open: false, part: false }" x-init="async () => {
                 if(!window.location.hash) {
-                    part = 'assets/part/home.html?v=asdas';
+                    part = 'assets/part/home.html?v=2';
                     let tab = getParams()['tab'] ? getParams()['tab'] : 'girls';
                     let { blocks } = await fetchJson(`${modules}/v2/models?limit=50&topLimit=50&favoritesLimit=50&primaryTag=${tab}`);
                     json = blocks;
                     open = blocks.length;
                 } else {
                     const username = window.location.hash.substring(1);
-                    part = 'assets/part/stream.html';
+                    part = 'assets/part/stream.html?v=2';
                     let { user } = await fetchJson(`${modules}/v2/models/username/${username}/cam`);
                     json = user;
                     open = true;
