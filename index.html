@@ -57,7 +57,7 @@
                 if(!window.location.hash) {
                     part = 'assets/part/home.html?v=2';
                     let tab = getParams()['tab'] ? getParams()['tab'] : 'girls';
-                    let { blocks } = await fetchJson(`${modules}/v2/models?limit=50&topLimit=50&favoritesLimit=50&primaryTag=${tab}`);
+                    let { blocks } = await fetchJson(`${modules}/v2/models?limit=24&topLimit=24&favoritesLimit=24&primaryTag=${tab}`);
                     json = blocks;
                     open = blocks.length;
                 } else {
